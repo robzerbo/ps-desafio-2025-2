@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CharacterClassController;
+use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,5 +21,15 @@ Route::middleware(['auth:sanctum', 'can:admin'])->group(function () {
 Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
+
+Route::get('/character-classes', [CharacterClassController::class, 'index']);
+Route::post('/character-classes', [CharacterClassController::class, 'store']);
+Route::get('/character-classes/{id}', [CharacterClassController::class, 'show']);
+Route::put('/character-classes/{id}', [CharacterClassController::class, 'update']);
+Route::delete('/character-classes/{id}', [CharacterClassController::class, 'destroy']);
+
+//Route::apiResource('character-classes', CharacterClassController::class);
+
+Route::apiResource('/characters', CharacterController::class);
 
 require __DIR__.'/auth.php';
