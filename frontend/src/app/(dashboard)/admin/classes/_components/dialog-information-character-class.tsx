@@ -8,24 +8,23 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/dialog'
-import FormFieldsCategory from './form-fields-category'
-import { categoryType } from '@/types/category'
-import SkeletonFormFieldsCategory from './skeleton-category'
+import FormFieldsCharacterClass from './form-fields-character-class'
+import { characterClassType } from '@/types/character-class'
 import { api } from '@/services/api'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/use-toast'
 
-interface DialogInformationCategoryProps {
+interface DialogInformationCharacterClassProps {
   id: string
   children: React.ReactNode
   isInformation?: boolean
 }
 
-export function DialogInformationCategory({
+export function DialogInformationCharacterClass({
   id,
   children,
-}: DialogInformationCategoryProps) {
-  const [category, setCategory] = useState<categoryType | null>(null)
+}: DialogInformationCharacterClassProps) {
+  const [characterClass, setCharacterClass] = useState<characterClassType | null>(null)
   const [open, setOpen] = useState<boolean>()
   const { toast } = useToast()
 
@@ -34,11 +33,11 @@ export function DialogInformationCategory({
       const { response } = null // requisicao para api
 
       if (response) {
-        setCategory(response)
+        setCharacterClass(response)
       } else {
-        setCategory(null)
+        setCharacterClass(null)
         toast({
-          title: 'Categoria não encontrada!',
+          title: 'Classe do personagem não encontrada!',
         })
         setOpen(false)
       }
@@ -46,7 +45,7 @@ export function DialogInformationCategory({
 
     requestData()
 
-    return () => setCategory(null)
+    return () => setCharacterClass(null)
   }, [id, open, toast])
 
   return (
@@ -54,15 +53,15 @@ export function DialogInformationCategory({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Informações da categoria</DialogTitle>
+          <DialogTitle>Informações da classe do personagem</DialogTitle>
           <DialogDescription>
-            Visualize as informações detalhadas da categoria abaixo.
+            Visualize as informações detalhadas da classe do personagem abaixo.
           </DialogDescription>
         </DialogHeader>
-        {category ? (
-          <FormFieldsCategory category={category} readOnly />
+        {characterClass ? (
+          <FormFieldsCharacterClass characterClass={characterClass} readOnly />
         ) : (
-          <SkeletonFormFieldsCategory readOnly />
+          <></>
         )}
       </DialogContent>
     </Dialog>

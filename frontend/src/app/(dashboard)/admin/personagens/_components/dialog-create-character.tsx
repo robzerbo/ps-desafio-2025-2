@@ -8,18 +8,18 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/dialog'
-import FormFieldsProperty from './form-fields-property'
-import { createProperty } from '@/actions/property'
+import FormFieldsProperty from './form-fields-character'
 import { filterFormData } from '@/services/filter-form-data'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/use-toast'
 import { ResponseErrorType } from '@/services/api'
+import { createCharacter } from '@/actions/character'
 
-interface DialogCreatePropertyProps {
+interface DialogCreateCharacterProps {
   children: React.ReactNode
 }
 
-export function DialogCreateProperty({ children }: DialogCreatePropertyProps) {
+export function DialogCreateCharacter({ children }: DialogCreateCharacterProps) {
   const [open, setOpen] = useState<boolean>()
   const [error, setError] = useState<ResponseErrorType | null>(null)
   const { toast } = useToast()
@@ -33,16 +33,16 @@ export function DialogCreateProperty({ children }: DialogCreatePropertyProps) {
   const submit = async (form: FormData) => {
     const newForm = await filterFormData(form)
 
-    const { error } = await JSON.parse(await createProperty(newForm))
+    const { error } = await JSON.parse(await createCharacter(newForm))
 
     if (error) {
       setError(error)
       toast({
-        title: 'Não foi possível criar o imóvel!',
+        title: 'Não foi possível criar o personagem!',
       })
     } else {
       toast({
-        title: 'Imóvel criado com sucesso!',
+        title: 'Personagem criado com sucesso!',
       })
       setOpen(false)
     }
@@ -53,9 +53,9 @@ export function DialogCreateProperty({ children }: DialogCreatePropertyProps) {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Adicionar imóvel</DialogTitle>
+          <DialogTitle>Adicionar personagem</DialogTitle>
           <DialogDescription>
-            Preencha as informações do novo imóvel abaixo e clique em
+            Preencha as informações do novo personagem abaixo e clique em
             &rdquo;Salvar&rdquo; para incluí-lo no sistema.
           </DialogDescription>
         </DialogHeader>

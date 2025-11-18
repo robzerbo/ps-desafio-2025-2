@@ -9,36 +9,36 @@ import {
   TableRow,
 } from '@/components/dashboard/table'
 
-import { categoryType } from '@/types/category'
+import { characterClassType } from '@/types/character-class'
 import { Button } from '@/components/button'
 import { LuInfo, LuPen, LuPlusCircle, LuTrash } from 'react-icons/lu'
-import { DialogUpdateCategory } from './dialog-update-category'
-import { DialogCategoryDelete } from './dialog-delete-category'
-import { DialogInformationCategory } from './dialog-information-category'
-import { DialogCreateCategory } from './dialog-create-category'
+import { DialogUpdateCharacterClass } from './dialog-update-character-class'
+import { DialogCharacterClassDelete } from './dialog-delete-character-class'
+import { DialogInformationCharacterClass } from './dialog-information-character-class'
+import { DialogCreateCharacterClass } from './dialog-create-character-class'
 
-export default async function ListCategory() {
+export default async function ListCharacterClass() {
   const { response } = null // requisicao para api
 
   if (!response) {
     return (
       <DashboardContainer className="text-destructive">
-        Não foi possível obter as categorias.
+        Não foi possível obter as classes de personagens.
       </DashboardContainer>
     )
   }
 
-  const categories: categoryType[] = response
+  const characterClasses: characterClassType[] = response
 
   return (
     <>
       <DashboardContainer className="flex h-min justify-between space-x-0 gap-y-2.5 max-sm:flex-col">
-        <DialogCreateCategory>
+        <DialogCreateCharacterClass>
           <Button size="sm">
             <LuPlusCircle />
-            Nova categoria
+            Nova Classe de personagem
           </Button>
-        </DialogCreateCategory>
+        </DialogCreateCharacterClass>
       </DashboardContainer>
       <DashboardContainer>
         <Table>
@@ -49,31 +49,31 @@ export default async function ListCategory() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {categories?.map((category: categoryType) => (
-              <TableRow key={category.id}>
-                <TableCell>{category.name}</TableCell>
+            {characterClasses?.map((characterClass: characterClassType) => (
+              <TableRow key={characterClass.id}>
+                <TableCell>{characterClass.name}</TableCell>
                 <TableCell className="flex justify-end gap-2">
-                  <DialogInformationCategory id={category.id}>
+                  <DialogInformationCharacterClass id={characterClass.id}>
                     <Button variant="default-inverse" size="icon">
                       <LuInfo />
                     </Button>
-                  </DialogInformationCategory>
-                  <DialogUpdateCategory id={category.id}>
+                  </DialogInformationCharacterClass>
+                  <DialogUpdateCharacterClass id={characterClass.id}>
                     <Button variant="secondary-inverse" size="icon">
                       <LuPen />
                     </Button>
-                  </DialogUpdateCategory>
-                  <DialogCategoryDelete id={category.id}>
+                  </DialogUpdateCharacterClass>
+                  <DialogCharacterClassDelete id={characterClass.id}>
                     <Button variant="destructive-inverse" size="icon">
                       <LuTrash />
                     </Button>
-                  </DialogCategoryDelete>
+                  </DialogCharacterClassDelete>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
-          {!categories.length && (
-            <TableCaption>Nenhuma categoria encontrada.</TableCaption>
+          {!characterClasses.length && (
+            <TableCaption>Nenhuma classe de personagem encontrada.</TableCaption>
           )}
         </Table>
       </DashboardContainer>

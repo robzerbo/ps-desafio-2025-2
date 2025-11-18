@@ -12,28 +12,28 @@ import { Input } from '@/components/input'
 import { Label } from '@/components/label'
 import { cn } from '@/lib/utils'
 import { ResponseErrorType } from '@/services/api'
-import { categoryType } from '@/types/category'
+import { characterType } from '@/types/character'
 import { useState } from 'react'
 import { useFormStatus } from 'react-dom'
 
-interface FormFieldsCategoryProps {
-  category?: categoryType | null
+interface FormFieldsCharacterProps {
+  character?: characterType | null
   readOnly?: boolean
   error?: ResponseErrorType | null
 }
 
-export default function FormFieldsCategory({
-  category,
+export default function FormFieldsCharacter({
+  character,
   readOnly,
   error,
-}: FormFieldsCategoryProps) {
+}: FormFieldsCharacterProps) {
   const { pending } = useFormStatus()
+  const [updateImage, setUpdateImage] = useState<string | undefined>()
+
   return (
     <>
       <FormFieldsGroup>
-        {category && (
-          <Input defaultValue={category.id} type="text" name="id" hidden />
-        )}
+        {character && <Input defaultValue={character.id} type="text" name="id" hidden />}
         {/* inserir campos do formulário */}
       </FormFieldsGroup>
       <DialogFooter className={cn({ hidden: readOnly })}>

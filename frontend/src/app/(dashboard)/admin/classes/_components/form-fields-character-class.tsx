@@ -12,28 +12,28 @@ import { Input } from '@/components/input'
 import { Label } from '@/components/label'
 import { cn } from '@/lib/utils'
 import { ResponseErrorType } from '@/services/api'
-import { propertyType } from '@/types/property'
+import { characterClassType } from '@/types/character-class'
 import { useState } from 'react'
 import { useFormStatus } from 'react-dom'
 
-interface FormFieldsPropertyProps {
-  property?: propertyType | null
+interface FormFieldsCharacterClassProps {
+  characterClass?: characterClassType | null
   readOnly?: boolean
   error?: ResponseErrorType | null
 }
 
-export default function FormFieldsProperty({
-  property,
+export default function FormFieldsCharacterClass({
+  characterClass,
   readOnly,
   error,
-}: FormFieldsPropertyProps) {
+}: FormFieldsCharacterClassProps) {
   const { pending } = useFormStatus()
-  const [updateImage, setUpdateImage] = useState<string | undefined>()
-
   return (
     <>
       <FormFieldsGroup>
-        {property && <Input defaultValue={property.id} type="text" name="id" hidden />}
+        {characterClass && (
+          <Input defaultValue={characterClass.id} type="text" name="id" hidden />
+        )}
         {/* inserir campos do formulário */}
       </FormFieldsGroup>
       <DialogFooter className={cn({ hidden: readOnly })}>

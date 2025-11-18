@@ -1,6 +1,6 @@
 'use client'
 
-import { destroyProperty } from '@/actions/property'
+import { destroyCharacter } from '@/actions/character'
 import { Button } from '@/components/button'
 import {
   Dialog,
@@ -14,25 +14,25 @@ import {
 import { useToast } from '@/components/use-toast'
 import { useState } from 'react'
 
-interface DialogCreatePropertyProps {
+interface DialogCreateCharacterProps {
   id: string
   children: React.ReactNode
 }
 
-export function DialogPropertyDelete({ id, children }: DialogCreatePropertyProps) {
+export function DialogCharacterDelete({ id, children }: DialogCreateCharacterProps) {
   const [open, setOpen] = useState<boolean>()
   const { toast } = useToast()
 
   const submit = async () => {
-    const { error } = await JSON.parse(await destroyProperty(id))
+    const { error } = await JSON.parse(await destroyCharacter(id))
 
     if (error) {
       toast({
-        title: 'Não foi possível excluir o imóvel!',
+        title: 'Não foi possível excluir o personagem!',
       })
     } else {
       toast({
-        title: 'Imóvel deletado com sucesso!',
+        title: 'Personagem deletado com sucesso!',
       })
     }
 
@@ -44,10 +44,10 @@ export function DialogPropertyDelete({ id, children }: DialogCreatePropertyProps
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Confirmar exclusão do imóvel</DialogTitle>
+          <DialogTitle>Confirmar exclusão do personagem</DialogTitle>
           <DialogDescription>
-            Tem certeza de que deseja excluir este imóvel? Esta ação é
-            irreversível e removerá permanentemente o imóvel do sistema. Deseja
+            Tem certeza de que deseja excluir este personagem? Esta ação é
+            irreversível e removerá permanentemente o personagem do sistema. Deseja
             continuar com a exclusão?
           </DialogDescription>
         </DialogHeader>

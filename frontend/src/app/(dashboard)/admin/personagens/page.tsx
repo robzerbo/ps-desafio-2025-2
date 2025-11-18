@@ -4,8 +4,8 @@ import {
   DashboardHeaderTitle,
   DashboardMain,
 } from '@/components/dashboard/dashboard-items'
-import { LuLayers } from 'react-icons/lu'
-import ListCategories from './_components/list-categories'
+import { FaCarAlt } from "react-icons/fa";
+import ListProperties from './_components/list-properties';
 import { Suspense } from 'react'
 
 export default async function Page() {
@@ -13,16 +13,16 @@ export default async function Page() {
     <>
       <DashboardHeader>
         <DashboardHeaderTitle>
-          <LuLayers />
-          Categorias
+        <FaCarAlt />
+          Personagens
         </DashboardHeaderTitle>
         <DashboardHeaderDescription>
-          Cadastre, edite, visualize e exclua categorias.
+          Cadastre, edite, visualize e exclua Personagens.
         </DashboardHeaderDescription>
       </DashboardHeader>
       <DashboardMain>
         <Suspense>
-          <ListCategories />
+          <ListProperties />
         </Suspense>
       </DashboardMain>
     </>

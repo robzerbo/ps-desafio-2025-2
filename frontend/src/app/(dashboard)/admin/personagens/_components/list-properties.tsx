@@ -10,13 +10,13 @@ import {
   TableRow,
 } from '@/components/dashboard/table'
 import { api } from '@/services/api'
-import { propertyType } from '@/types/property'
 import { Button } from '@/components/button'
 import { LuInfo, LuPen, LuPlusCircle, LuTrash } from 'react-icons/lu'
-import { DialogUpdateProperty } from './dialog-update-property'
-import { DialogPropertyDelete } from './dialog-delete-property'
-import { DialogInformationProperty } from './dialog-information-property'
-import { DialogCreateProperty } from './dialog-create-property'
+import { DialogUpdateCharacter } from './dialog-update-character'
+import { DialogCharacterDelete } from './dialog-delete-character'
+import { DialogInformationCharacter } from './dialog-information-character'
+import { DialogCreateCharacter} from './dialog-create-character'
+import { characterType } from '@/types/character'
 
 export default async function ListProperties() {
   const { response } = null // requisicao para api
@@ -24,22 +24,22 @@ export default async function ListProperties() {
   if (!response) {
     return (
       <DashboardContainer className="text-destructive">
-        Não foi possível obter os imóveis.
+        Não foi possível obter os personagens.
       </DashboardContainer>
     )
   }
 
-  const properties: propertyType[] = response
+  const characters: characterType[] = response
 
   return (
     <>
       <DashboardContainer className="flex h-min justify-between space-x-0 gap-y-2.5 max-sm:flex-col">
-        <DialogCreateProperty>
+        <DialogCreateCharacter>
           <Button size="sm">
             <LuPlusCircle />
             Novo imóvel
           </Button>
-        </DialogCreateProperty>
+        </DialogCreateCharacter>
       </DashboardContainer>
       <DashboardContainer>
         <Table>
@@ -53,39 +53,39 @@ export default async function ListProperties() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {properties?.map((property: propertyType) => (
-              <TableRow key={property.id}>
+            {characters?.map((character: characterType) => (
+              <TableRow key={character.id}>
                 <TableCell>
-                  <TabbleCellImage src={property.image} />
+                  <TabbleCellImage src={character.image} />
                 </TableCell>
                 
-                <TableCell>{property.title}</TableCell>
-                <TableCell>{property.amount}</TableCell>
-                <TableCell>{property.category.name}</TableCell>
+                <TableCell>{character.title}</TableCell>
+                <TableCell>{character.amount}</TableCell>
+                <TableCell>{character.category.name}</TableCell>
                 {/* demais propriedades de propertyType */}
                 
                 <TableCell className="flex justify-end gap-2">
-                  <DialogInformationProperty id={property.id}>
+                  <DialogInformationCharacter id={character.id}>
                     <Button variant="default-inverse" size="icon">
                       <LuInfo />
                     </Button>
-                  </DialogInformationProperty>
-                  <DialogUpdateProperty id={property.id}>
+                  </DialogInformationCharacter>
+                  <DialogUpdateCharacter id={character.id}>
                     <Button variant="secondary-inverse" size="icon">
                       <LuPen />
                     </Button>
-                  </DialogUpdateProperty>
-                  <DialogPropertyDelete id={property.id}>
+                  </DialogUpdateCharacter>
+                  <DialogCharacterDelete id={character.id}>
                     <Button variant="destructive-inverse" size="icon">
                       <LuTrash />
                     </Button>
-                  </DialogPropertyDelete>
+                  </DialogCharacterDelete>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
-          {!properties.length && (
-            <TableCaption>Nenhum imóvel encontrado.</TableCaption>
+          {!characters.length && (
+            <TableCaption>Nenhum personagem encontrado.</TableCaption>
           )}
         </Table>
       </DashboardContainer>

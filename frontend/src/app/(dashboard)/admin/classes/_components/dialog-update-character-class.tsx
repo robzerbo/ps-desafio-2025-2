@@ -8,35 +8,38 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/dialog'
-import FormFieldsProperty from './form-fields-property'
-import { updateProperty } from '@/actions/property'
+import FormFieldsCharacterClass from './form-fields-character-class'
+import { updateCharacterClass } from '@/actions/character-class'
 import { filterFormData } from '@/services/filter-form-data'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/use-toast'
-import { propertyType } from '@/types/property'
+import { characterClassType } from '@/types/character-class'
 import { ResponseErrorType, api } from '@/services/api'
 
-interface DialogUpdatePropertyProps {
+interface DialogUpdateCharacterClassProps {
   id: string
   children: React.ReactNode
 }
 
-export function DialogUpdateProperty({ id, children }: DialogUpdatePropertyProps) {
-  const [property, setProperty] = useState<propertyType | null>(null)
+export function DialogUpdateCharacterClass({
+  id,
+  children,
+}: DialogUpdateCharacterClassProps) {
+  const [characterClass, setCharacterClass] = useState<characterClassType | null>(null)
   const [open, setOpen] = useState<boolean>()
   const [error, setError] = useState<ResponseErrorType | null>(null)
   const { toast } = useToast()
 
   useEffect(() => {
     const requestData = async () => {
-      const { response } = await api<propertyType>('GET', `/properties/${id}`)
+      const { response } = null // requisicao para api
 
       if (response) {
-        setProperty(response)
+        setCharacterClass(response)
       } else {
-        setProperty(null)
+        setCharacterClass(null)
         toast({
-          title: 'Imóvel  não encontrado!',
+          title: 'Classe do personagem não encontrada!',
         })
         setOpen(false)
       }
@@ -45,7 +48,7 @@ export function DialogUpdateProperty({ id, children }: DialogUpdatePropertyProps
     requestData()
 
     return () => {
-      setProperty(null)
+      setCharacterClass(null)
       setError(null)
     }
   }, [id, open, toast])
@@ -53,16 +56,16 @@ export function DialogUpdateProperty({ id, children }: DialogUpdatePropertyProps
   const submit = async (form: FormData) => {
     const newForm = await filterFormData(form)
 
-    const { error } = null 
+    const { error } = await JSON.parse(await updateCharacterClass(newForm))
 
     if (error) {
       setError(error)
       toast({
-        title: 'Não foi possível editar o imóvel!',
+        title: 'Não foi possível editar a classe do personagem!',
       })
     } else {
       toast({
-        title: 'Imóvel editado com sucesso!',
+        title: 'Classe do personagem editada com sucesso!',
       })
       setOpen(false)
     }
@@ -73,14 +76,14 @@ export function DialogUpdateProperty({ id, children }: DialogUpdatePropertyProps
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Editar imóvel</DialogTitle>
+          <DialogTitle>Editar classe do personagem</DialogTitle>
           <DialogDescription>
-            Atualize as informações do imóvel abaixo e clique em
+            Atualize as informações da classe do personagem abaixo e clique em
             &quot;Salvar&quot; para aplicar as alterações.
           </DialogDescription>
         </DialogHeader>
         <form action={submit}>
-          <FormFieldsProperty error={error} property={property} />
+          <FormFieldsCharacterClass error={error} characterClass={characterClass} />
         </form>
       </DialogContent>
     </Dialog>

@@ -8,23 +8,23 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/dialog'
-import FormFieldsProperty from './form-fields-property'
-import { propertyType } from '@/types/property'
 import { api } from '@/services/api'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/use-toast'
+import { characterType } from '@/types/character'
+import FormFieldsCharacter from './form-fields-character'
 
-interface DialogInformationPropertyProps {
+interface DialogInformationCharacterProps {
   id: string
   children: React.ReactNode
   isInformation?: boolean
 }
 
-export function DialogInformationProperty({
+export function DialogInformationCharacter({
   id,
   children,
-}: DialogInformationPropertyProps) {
-  const [property, setProperty] = useState<propertyType | null>(null)
+}: DialogInformationCharacterProps) {
+  const [character, setCharacter] = useState<characterType | null>(null)
   const [open, setOpen] = useState<boolean>()
   const { toast } = useToast()
 
@@ -33,11 +33,11 @@ export function DialogInformationProperty({
       const { response } = null
 
       if (response) {
-        setProperty(response)
+        setCharacter(response)
       } else {
-        setProperty(null)
+        setCharacter(null)
         toast({
-          title: 'Veículo não encontrado!',
+          title: 'Personagem não encontrado!',
         })
         setOpen(false)
       }
@@ -45,7 +45,7 @@ export function DialogInformationProperty({
 
     requestData()
 
-    return () => setProperty(null)
+    return () => setCharacter(null)
   }, [id, open, toast])
 
   return (
@@ -53,12 +53,12 @@ export function DialogInformationProperty({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Informações do imóvel</DialogTitle>
+          <DialogTitle>Informações do personagem</DialogTitle>
           <DialogDescription>
-            Visualize as informações detalhadas do imóvel abaixo.
+            Visualize as informações detalhadas do personagem abaixo.
           </DialogDescription>
         </DialogHeader>
-        <FormFieldsProperty property={property} readOnly />
+        <FormFieldsCharacter character={character} readOnly />
       </DialogContent>
     </Dialog>
   )

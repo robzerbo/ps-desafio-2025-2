@@ -1,6 +1,6 @@
 'use client'
 
-import { destroyCategory } from '@/actions/category'
+import { destroyCharacterClass } from '@/actions/character-class'
 import { Button } from '@/components/button'
 import {
   Dialog,
@@ -14,28 +14,28 @@ import {
 import { useToast } from '@/components/use-toast'
 import { useState } from 'react'
 
-interface DialogCreateCategoryProps {
+interface DialogCreateCharacterClassProps {
   id: string
   children: React.ReactNode
 }
 
-export function DialogCategoryDelete({
+export function DialogCharacterClassDelete({
   id,
   children,
-}: DialogCreateCategoryProps) {
+}: DialogCreateCharacterClassProps) {
   const [open, setOpen] = useState<boolean>()
   const { toast } = useToast()
 
   const submit = async () => {
-    const { error } = await JSON.parse(await destroyCategory(id))
+    const { error } = await JSON.parse(await destroyCharacterClass(id))
 
     if (error) {
       toast({
-        title: 'Não foi possível excluir a categoria!',
+        title: 'Não foi possível excluir a classe do personagem!',
       })
     } else {
       toast({
-        title: 'Categoria deletada com sucesso!',
+        title: 'Classe do personagem deletada com sucesso!',
       })
     }
 
@@ -47,10 +47,10 @@ export function DialogCategoryDelete({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Confirmar exclusão de categoria</DialogTitle>
+          <DialogTitle>Confirmar exclusão de classe de personagem</DialogTitle>
           <DialogDescription>
-            Tem certeza de que deseja excluir esta categoria? Esta ação é
-            irreversível e removerá permanentemente a categoria do sistema.
+            Tem certeza de que deseja excluir esta classe de personagem? Esta ação é
+            irreversível e removerá permanentemente a classe de personagem do sistema.
             Deseja continuar com a exclusão?
           </DialogDescription>
         </DialogHeader>

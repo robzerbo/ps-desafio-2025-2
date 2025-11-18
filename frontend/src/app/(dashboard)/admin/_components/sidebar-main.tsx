@@ -38,13 +38,13 @@ export function SidebarMain() {
           <LuUsers />
           <SidebarNavLinkLabel>Usuários</SidebarNavLinkLabel>
         </SidebarNavLink>
-        <SidebarNavLink href="/admin/imoveis">
+        <SidebarNavLink href="/admin/personagens">
           <MdOutlineHomeWork />
-          <SidebarNavLinkLabel>Imóveis</SidebarNavLinkLabel>
+          <SidebarNavLinkLabel>Personagens</SidebarNavLinkLabel>
         </SidebarNavLink>
-        <SidebarNavLink href="/admin/categorias">
+        <SidebarNavLink href="/admin/classes">
           <TbCategory />
-          <SidebarNavLinkLabel>Categorias</SidebarNavLinkLabel>
+          <SidebarNavLinkLabel>Classes</SidebarNavLinkLabel>
         </SidebarNavLink>
       </SidebarNav>
       <SidebarFooter>
