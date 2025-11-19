@@ -34,7 +34,20 @@ export default function FormFieldsCharacterClass({
         {characterClass && (
           <Input defaultValue={characterClass.id} type="text" name="id" hidden />
         )}
-        {/* inserir campos do formulário */}
+        <FormField>
+          <Label htmlFor="name" required>
+            Nome da classe
+          </Label>
+          <Input 
+            name="name"
+            id="name"
+            placeholder="Digite o nome da classe de personagem"
+            defaultValue={characterClass?.name}
+            disabled={pending}
+            readOnly={readOnly}
+            error={error?.errors?.name}
+          />
+      </FormField>
       </FormFieldsGroup>
       <DialogFooter className={cn({ hidden: readOnly })}>
         <Button type="submit" pending={pending}>

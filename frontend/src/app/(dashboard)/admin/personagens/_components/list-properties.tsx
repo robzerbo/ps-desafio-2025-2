@@ -19,7 +19,7 @@ import { DialogCreateCharacter} from './dialog-create-character'
 import { characterType } from '@/types/character'
 
 export default async function ListProperties() {
-  const { response } = null // requisicao para api
+  const { response } = await api<characterType[]>('GET', '/characters');
 
   if (!response) {
     return (
@@ -37,7 +37,7 @@ export default async function ListProperties() {
         <DialogCreateCharacter>
           <Button size="sm">
             <LuPlusCircle />
-            Novo imóvel
+            Novo personagem
           </Button>
         </DialogCreateCharacter>
       </DashboardContainer>
@@ -46,9 +46,9 @@ export default async function ListProperties() {
           <TableHeader>
             <TableRow>
               <TableHead>Imagem</TableHead>
-              <TableHead>Titulo</TableHead>
-              <TableHead>Categoria</TableHead>
-              <TableHead>Quantidade</TableHead>
+              <TableHead>Nome</TableHead>
+              <TableHead>Classe</TableHead>
+              <TableHead>Poderes</TableHead>
               <TableHead className="text-right">Ações</TableHead>
             </TableRow>
           </TableHeader>
@@ -59,9 +59,9 @@ export default async function ListProperties() {
                   <TabbleCellImage src={character.image} />
                 </TableCell>
                 
-                <TableCell>{character.title}</TableCell>
-                <TableCell>{character.amount}</TableCell>
-                <TableCell>{character.category.name}</TableCell>
+                <TableCell>{character.name}</TableCell>
+                <TableCell>{character.character_class.name}</TableCell>
+                <TableCell>{character.powers}</TableCell>
                 {/* demais propriedades de propertyType */}
                 
                 <TableCell className="flex justify-end gap-2">

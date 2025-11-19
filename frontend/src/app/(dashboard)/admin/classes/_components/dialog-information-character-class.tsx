@@ -30,7 +30,7 @@ export function DialogInformationCharacterClass({
 
   useEffect(() => {
     const requestData = async () => {
-      const { response } = null // requisicao para api
+      const { response } = await api<characterClassType>('GET', `/character-classes/${id}`);
 
       if (response) {
         setCharacterClass(response)

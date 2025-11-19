@@ -16,9 +16,10 @@ import { DialogUpdateCharacterClass } from './dialog-update-character-class'
 import { DialogCharacterClassDelete } from './dialog-delete-character-class'
 import { DialogInformationCharacterClass } from './dialog-information-character-class'
 import { DialogCreateCharacterClass } from './dialog-create-character-class'
+import { api } from '@/services/api'
 
 export default async function ListCharacterClass() {
-  const { response } = null // requisicao para api
+  const { response } = await api<characterClassType[]>('GET', '/character-classes');
 
   if (!response) {
     return (

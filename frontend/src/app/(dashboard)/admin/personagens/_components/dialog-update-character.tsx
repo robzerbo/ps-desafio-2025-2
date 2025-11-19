@@ -11,10 +11,10 @@ import {
 import { filterFormData } from '@/services/filter-form-data'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/use-toast'
-import { propertyType } from '@/types/property'
 import { ResponseErrorType, api } from '@/services/api'
 import { characterType } from '@/types/character'
 import FormFieldsCharacter from './form-fields-character'
+import { updateCharacter } from '@/actions/character'
 
 interface DialogUpdateCharacterProps {
   id: string
@@ -29,7 +29,7 @@ export function DialogUpdateCharacter({ id, children }: DialogUpdateCharacterPro
 
   useEffect(() => {
     const requestData = async () => {
-      const { response } = await api<propertyType>('GET', `/properties/${id}`)
+      const { response } = await api<characterType>('GET', `/characters/${id}`)
 
       if (response) {
         setCharacter(response)
@@ -53,7 +53,7 @@ export function DialogUpdateCharacter({ id, children }: DialogUpdateCharacterPro
   const submit = async (form: FormData) => {
     const newForm = await filterFormData(form)
 
-    const { error } = null 
+    const { error } = await JSON.parse(await updateCharacter(newForm)) 
 
     if (error) {
       setError(error)
@@ -73,9 +73,9 @@ export function DialogUpdateCharacter({ id, children }: DialogUpdateCharacterPro
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Editar imóvel</DialogTitle>
+          <DialogTitle>Editar Personagem</DialogTitle>
           <DialogDescription>
-            Atualize as informações do imóvel abaixo e clique em
+            Atualize as informações do personagem abaixo e clique em
             &quot;Salvar&quot; para aplicar as alterações.
           </DialogDescription>
         </DialogHeader>

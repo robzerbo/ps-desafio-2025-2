@@ -15,9 +15,10 @@ import { LuHome, LuLogOut, LuUsers } from 'react-icons/lu'
 import { DropdownMenuItem } from '@/components/dropdown-menu'
 import { signOut, useSession } from 'next-auth/react'
 import logo from '@/assets/img/logo.jpeg'
-import { MdOutlineHomeWork } from "react-icons/md";
+import { GiCharacter } from "react-icons/gi";
 import { TbCategory } from "react-icons/tb";
 import { VscGraph } from "react-icons/vsc";
+import { FaFistRaised } from 'react-icons/fa'
 
 export function SidebarMain() {
   const session = useSession()
@@ -39,11 +40,11 @@ export function SidebarMain() {
           <SidebarNavLinkLabel>Usuários</SidebarNavLinkLabel>
         </SidebarNavLink>
         <SidebarNavLink href="/admin/personagens">
-          <MdOutlineHomeWork />
+          <GiCharacter />
           <SidebarNavLinkLabel>Personagens</SidebarNavLinkLabel>
         </SidebarNavLink>
         <SidebarNavLink href="/admin/classes">
-          <TbCategory />
+          <FaFistRaised />
           <SidebarNavLinkLabel>Classes</SidebarNavLinkLabel>
         </SidebarNavLink>
       </SidebarNav>

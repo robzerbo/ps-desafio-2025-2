@@ -7,13 +7,14 @@ import {
 import { FaCarAlt } from "react-icons/fa";
 import ListProperties from './_components/list-properties';
 import { Suspense } from 'react'
+import { GiCharacter } from 'react-icons/gi';
 
 export default async function Page() {
   return (
     <>
       <DashboardHeader>
         <DashboardHeaderTitle>
-        <FaCarAlt />
+        <GiCharacter />
           Personagens
         </DashboardHeaderTitle>
         <DashboardHeaderDescription>
