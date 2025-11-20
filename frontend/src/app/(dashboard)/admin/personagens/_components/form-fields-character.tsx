@@ -56,8 +56,6 @@ export default function FormFieldsCharacter({
       <FormFieldsGroup>
         {character && <Input defaultValue={character.id} type="text" name="id" hidden />}
 
-        <Input defaultValue={character?.acquired ?? 0} type="number"  min="0" max="1" name="acquired" id="acquired" hidden />
-        
         <FormField>
           <Label htmlFor="name" required>
             Nome
@@ -129,6 +127,23 @@ export default function FormFieldsCharacter({
               error={error?.errors?.description}
             />
         </FormField>
+
+        <FormField>
+          <Label htmlFor="name" required>
+            Adquirido
+          </Label>
+          <Input 
+            name="acquired"
+            id="acquired"
+            type="number"  
+            min="0" 
+            max="1"
+            defaultValue={character?.acquired}
+            disabled={pending}
+            readOnly={readOnly}
+            error={error?.errors?.acquired}
+          />
+      </FormField>
       
         <FormField>
           <Label
