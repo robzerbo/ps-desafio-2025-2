@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&family=Kablammo&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+.page{
+    font-family: "Arima", system-ui;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(135deg, rgba(225, 229, 241) , rgba(164, 166, 205) );
+    position: relative;
+    padding-bottom: 340px;
+}
+
+.wrapper{
+    margin: 2rem;
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 18rem));
+    justify-content: center;
+    transition: all 0.5s ease;
+}
+
+.title{
+    color: black;
+    padding-top: 16px;
+    font-weight: 800;
+    display: flex;
+    font-size: 36px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+
+@media screen and (max-width: 660px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+    }
+}

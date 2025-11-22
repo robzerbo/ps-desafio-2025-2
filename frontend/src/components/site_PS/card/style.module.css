@@ -1,0 +1,144 @@
+.card{
+    height: fit-content;
+    min-height: 30rem;
+    min-width: 16rem;
+
+    text-align: center;
+    background-color: rgb(236, 236, 239);
+    
+    clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
+
+    position: relative;
+}
+
+.card_img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.card_body{
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    background: rgba(45, 43, 67, 0.838);
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    padding: 1rem 1rem 2rem 1rem;
+    color: white;
+    z-index: 2;
+}
+
+.card_name{
+    color: rgba(251, 220, 43);
+    font-weight: 700;
+    font-size: 20px;
+    padding-bottom: 5px;
+}
+
+.card_content{
+    color: rgb(249, 233, 142);
+    font-size: 17px;
+    padding-bottom: 5px;
+}
+
+.acquireButton{
+    padding: 10px 18px;
+    background: #22c55e;
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+    clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%);
+}
+
+.acquireButton:hover{
+    background: #16a34a;
+    transform: scale(105%);
+}
+
+.acquireButton:active{
+    transform: scale(95%);
+}
+
+.soldOutButton{
+  padding: 10px 18px;
+  background: #9ca3af;
+  color: white;
+  font-weight: 700;
+  font-size: 20px;
+  cursor: not-allowed;
+  transition: 0.5s;
+  clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%);
+}
+
+.card_name,
+.card_content{
+    line-height: 100%;
+    margin: .5vh 0;
+}
+
+
+@media screen and (max-width: 660px) {
+    .card,
+    .card_img,
+    .card_body{
+        position: static !important;
+    }
+
+    .card{
+        display: flex;
+        flex-direction: row;
+        width: 90vw;
+        height: fit-content;
+        min-height: 10rem;
+
+        clip-path: none;
+        border-radius: 10px;
+    }
+
+    .card_img{
+        object-fit: cover;
+        max-width: 35vw;
+        border-radius: 10px 0 0 10px;
+        max-height: auto;
+    }
+
+    .card_body{
+        display: flex;
+        border-radius: 0 10px 10px 0;
+        flex-grow: 1;
+    }
+
+    .card_name{
+        font-size: 25px;
+    }
+
+    .card_content{
+        font-size: 15px;
+    }
+
+    .card_body > div{
+        margin-top: auto;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .card_content {
+        font-size: 13px;
+    }
+
+    .card_name {
+        font-size: 20px;
+    }
+}

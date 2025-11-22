@@ -34,3 +34,21 @@ export async function destroyCharacter(id: string) {
 
   return JSON.stringify(res)
 }
+
+
+export async function acquireCharacter(id: string) {
+  const acquired = "1"
+  
+  const res = await api('POST', `/characters/${id}`, {
+    data: {
+      acquired: acquired,
+      _method: 'PUT'
+    }
+  })
+  
+  if(!res.error){
+    revalidatePath('/')
+  }
+
+  return JSON.stringify(res)
+}
